@@ -25,7 +25,10 @@
   font-size: 7px;
   color: #98ae89;
 }
-.visual-pipeline {
+.visual-pipeline,
+.visual-terraform,
+.visual-ansible,
+.visual-containers {
   background: radial-gradient(ellipse at 50% 100%, #293529, transparent 75%), #17201b;
 }
 .pipeline {
@@ -264,7 +267,8 @@
   color: #899582;
 }
 .visual-space,
-.visual-platform {
+.visual-platform,
+.visual-research {
   background: #141b24;
 }
 .stars {
@@ -403,7 +407,8 @@
   width: 13px;
   height: 13px;
 }
-.visual-platform {
+.visual-platform,
+.visual-research {
   background: linear-gradient(#222139, #49465a);
 }
 .pixel-moon {

@@ -12,12 +12,35 @@ import {
 } from 'lucide-react';
 import type { Project } from '../data/portfolio';
 export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
+  const workflow = {
+    pipeline: {
+      file: 'deployment.yml',
+      steps: ['Commit', 'Build', 'Deploy', 'Monitor'],
+      note: 'Kubernetes / delivery & monitoring',
+    },
+    terraform: {
+      file: 'main.tf',
+      steps: ['Modules', 'Network', 'Compute', 'State'],
+      note: 'Azure / modular infrastructure as code',
+    },
+    ansible: {
+      file: 'configure_all.yml',
+      steps: ['Inventory', 'Roles', 'Configure', 'Harden'],
+      note: 'Azure / repeatable server configuration',
+    },
+    containers: {
+      file: 'Jenkinsfile',
+      steps: ['Webhook', 'Build', 'Test', 'Deploy'],
+      note: 'Nginx + Flask / Docker Compose',
+    },
+  };
+  const deployment = kind in workflow ? workflow[kind as keyof typeof workflow] : undefined;
   return (
     <div className={`project-visual visual-${kind}`} aria-label="Illustrative project preview">
-      {kind === 'pipeline' && (
+      {deployment && (
         <>
           <div className="preview-top">
-            <span>deployment.yml</span>
+            <span>{deployment.file}</span>
             <span className="tiny-status">● workflow illustration</span>
           </div>
           <div className="pipeline">
@@ -29,12 +52,13 @@ export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
                     <Check size={9} />
                   </span>
                 </div>
-                <span>{['Commit', 'Build', 'Deploy', 'Monitor'][i]}</span>
+                <span>{deployment.steps[i]}</span>
               </div>
             ))}
           </div>
           <div className="code-line">
-            <span>➜</span> infrastructure that scales with you<span className="cursor">_</span>
+            <span>➜</span> {deployment.note}
+            <span className="cursor">_</span>
           </div>
         </>
       )}
@@ -125,12 +149,16 @@ export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
           </div>
         </div>
       )}
-      {(kind === 'space' || kind === 'platform') && (
+      {(kind === 'space' || kind === 'platform' || kind === 'research') && (
         <>
           <div className="stars" />
           <span className="game-caption">
-            {kind === 'space' ? 'METEOR BLAST' : 'THE NEXT ADVENTURE'}
-            <small>UNITY / C#</small>
+            {kind === 'space'
+              ? 'METEOR BLAST'
+              : kind === 'research'
+                ? 'FINAL-YEAR PROJECT'
+                : 'THE NEXT ADVENTURE'}
+            <small>{kind === 'research' ? 'GAME DEVELOPMENT' : 'UNITY / C#'}</small>
           </span>
           {kind === 'space' ? (
             <>

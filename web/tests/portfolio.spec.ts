@@ -12,8 +12,8 @@ test('folder cover, role shortcuts and project details work', async ({ page }) =
         .evaluate((image: HTMLImageElement) => image.naturalWidth),
     )
     .toBeGreaterThan(0);
-  await page.getByRole('button', { name: 'Open Unity & Games, 2 projects' }).click();
-  await expect(page.locator('.ftp-card')).toHaveCount(2);
+  await page.getByRole('button', { name: 'Open Unity & Games, 3 projects' }).click();
+  await expect(page.locator('.ftp-card')).toHaveCount(3);
   await page
     .getByRole('button', { name: 'Meteor Blast · Unity game, GITHUB. Open details' })
     .click();
@@ -50,7 +50,7 @@ test('category tabs support keyboard filtering and theme persists', async ({ pag
     'aria-selected',
     'true',
   );
-  await expect(page.locator('.ftp-card')).toHaveCount(2);
+  await expect(page.locator('.ftp-card')).toHaveCount(5);
   await page.keyboard.press('End');
   await expect(tabs.getByRole('tab', { name: /Unity & Games/ })).toHaveAttribute(
     'aria-selected',
@@ -73,6 +73,42 @@ test('chapter accordions and workflow tabs navigate correctly', async ({ page })
   await expect(page.locator('.ftp-step-t')).toContainText('Automate');
   await page.getByRole('button', { name: 'Next step' }).click();
   await expect(page.locator('.ftp-step-t')).toContainText('Observe');
+});
+
+test('all ten curated projects link to their dedicated repositories', async ({ page }) => {
+  const repositories = [
+    'gemops-project',
+    'devops-project-2-azure-terraform',
+    'devops-project-3',
+    'devops-project-4',
+    'project-1-dockerized-multi-service',
+    'Care-Point-Project',
+    'dockerized-taskflow-project',
+    'Meteor-Blast',
+    'My-New-2D-Game',
+    'MyFinalYearProject',
+  ];
+  await page.goto('/');
+  const cards = page.locator('.ftp-card');
+  await expect(cards).toHaveCount(10);
+  await expect(cards.first()).toContainText('Main DevOps project');
+  for (const [index, repository] of repositories.entries()) {
+    await cards.nth(index).click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByRole('link', { name: 'Source code', exact: true })).toHaveAttribute(
+      'href',
+      `https://github.com/Kashmitha/${repository}`,
+    );
+    await dialog.getByRole('button', { name: 'Close details' }).click();
+    await expect(dialog).not.toBeVisible();
+  }
+  await page
+    .getByRole('tablist', { name: 'Filter work by category' })
+    .getByRole('tab', { name: /Full-stack .NET/ })
+    .click();
+  await expect(cards).toHaveCount(2);
+  await expect(cards.first()).toContainText('Care Point');
+  await expect(cards.first()).toContainText('Largest full-stack project');
 });
 
 test('contact draft persists and invalid forms do not submit', async ({ page }) => {

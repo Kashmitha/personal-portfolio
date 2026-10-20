@@ -8,7 +8,18 @@ export type Project = {
   tags: string[];
   repo: string;
   details: string[];
-  visual: 'pipeline' | 'observability' | 'taskflow' | 'care' | 'space' | 'platform';
+  featured?: string;
+  visual:
+    | 'pipeline'
+    | 'observability'
+    | 'terraform'
+    | 'ansible'
+    | 'containers'
+    | 'taskflow'
+    | 'care'
+    | 'space'
+    | 'platform'
+    | 'research';
 };
 export const profile = {
   name: 'Kashmitha Madushan',
@@ -22,27 +33,11 @@ export const profile = {
 };
 export const projects: Project[] = [
   {
-    id: 'aks',
-    title: 'Cloud-native. Production-ready.',
-    category: 'devops',
-    subtitle: 'Azure AKS platform',
-    description:
-      'An end-to-end Kubernetes deployment with infrastructure as code, rolling updates, and a complete monitoring stack.',
-    tags: ['Azure AKS', 'Terraform', 'Kubernetes', 'GitHub Actions'],
-    repo: 'devops-project-4',
-    visual: 'pipeline',
-    details: [
-      'Infrastructure provisioned with Terraform on Azure AKS.',
-      'Automated container delivery through GitHub Actions and Azure Container Registry.',
-      'Horizontal autoscaling, health probes, and zero-downtime rolling update configuration.',
-      'Prometheus and Grafana monitoring, deployed with Helm.',
-    ],
-  },
-  {
     id: 'gemops',
     title: 'Visibility into every layer.',
     category: 'devops',
     subtitle: 'GemOps · AWS observability',
+    featured: 'Main DevOps project',
     description:
       'A cloud-native observability and secrets platform, bringing metrics, logs, alerts, and deployments together on AWS.',
     tags: ['AWS EKS', 'Grafana', 'Prometheus', 'Vault'],
@@ -53,6 +48,92 @@ export const projects: Project[] = [
       'Metrics through Prometheus, dashboards with Grafana, and logs with Loki and Alloy.',
       'Secrets management with Vault and alert routing with Alertmanager.',
       'CI/CD pipeline includes scanning, deployment, and rollback.',
+    ],
+  },
+  {
+    id: 'azure-terraform',
+    title: 'Infrastructure, defined.',
+    category: 'devops',
+    subtitle: 'Azure infrastructure · Terraform',
+    description:
+      'Modular Azure infrastructure as code, connecting networking and Linux compute with remote state and automated Terraform workflows.',
+    tags: ['Azure', 'Terraform', 'Azure Blob Storage', 'GitHub Actions'],
+    repo: 'devops-project-2-azure-terraform',
+    visual: 'terraform',
+    details: [
+      'Separate networking and compute modules organize the infrastructure.',
+      'Resource groups, virtual networks, subnets and network security groups define the network layer.',
+      'Public IP, network interface and Ubuntu Linux VM resources form the compute layer.',
+      'Azure Blob Storage holds remote Terraform state with locking; GitHub Actions handles plan/apply workflows.',
+    ],
+  },
+  {
+    id: 'azure-ansible',
+    title: 'Configure once. Repeat reliably.',
+    category: 'devops',
+    subtitle: 'Azure configuration · Ansible',
+    description:
+      'Role-based Ansible automation for Azure Linux VMs, covering server configuration, application deployment and security hardening.',
+    tags: ['Ansible', 'Azure', 'Nginx', 'Docker'],
+    repo: 'devops-project-3',
+    visual: 'ansible',
+    details: [
+      'Reusable common, security, Docker and Nginx roles separate configuration responsibilities.',
+      'Dynamic Azure inventory, Jinja2 templates and handlers support repeatable configuration.',
+      'Security configuration includes UFW, fail2ban and SSH hardening.',
+      'Playbooks cover provisioning, server configuration, deployment and teardown; GitHub Actions runs lint and syntax checks.',
+    ],
+  },
+  {
+    id: 'aks',
+    title: 'Cloud-native. Carefully orchestrated.',
+    category: 'devops',
+    subtitle: 'Azure AKS platform',
+    description:
+      'A Kubernetes deployment on Azure AKS with Terraform infrastructure, container delivery, rolling updates and monitoring.',
+    tags: ['Azure AKS', 'Terraform', 'Kubernetes', 'GitHub Actions'],
+    repo: 'devops-project-4',
+    visual: 'pipeline',
+    details: [
+      'Terraform provisions Azure infrastructure; GitHub Actions delivers images through Azure Container Registry.',
+      'Rolling update configuration, rollback scripts and startup, liveness and readiness probes support application delivery.',
+      'Horizontal Pod Autoscaling, resource requests/limits and ResourceQuota define workload scaling and boundaries.',
+      'Prometheus and Grafana provide monitoring through a Helm-deployed stack.',
+    ],
+  },
+  {
+    id: 'docker-services',
+    title: 'The foundations of delivery.',
+    category: 'devops',
+    subtitle: 'Docker services · Jenkins CI/CD',
+    description:
+      'A foundational multi-service application pairing an Nginx frontend with a Flask API, Docker Compose and a Jenkins delivery pipeline.',
+    tags: ['Docker Compose', 'Jenkins', 'Python Flask', 'Nginx'],
+    repo: 'project-1-dockerized-multi-service',
+    visual: 'containers',
+    details: [
+      'Nginx serves the static frontend and Python Flask provides the REST API.',
+      'Docker Compose defines the multi-service application.',
+      'A GitHub webhook triggers the Jenkins pipeline.',
+      'Documented pipeline stages cover checkout, image builds, backend health tests, service deployment and verification.',
+    ],
+  },
+  {
+    id: 'care',
+    title: 'Software with a purpose.',
+    category: 'fullstack',
+    subtitle: 'Care Point · Healthcare system',
+    featured: 'Largest full-stack project',
+    description:
+      'A healthcare platform with a React interface and ASP.NET Core API for doctor discovery, appointments, prescriptions and administration.',
+    tags: ['React', 'ASP.NET Core', 'EF Core', 'SQL Server'],
+    repo: 'Care-Point-Project',
+    visual: 'care',
+    details: [
+      'React 19 UI paired with an ASP.NET Core 9 API, Entity Framework Core and SQL Server integration.',
+      'Source includes doctor search and availability, appointment management, and prescription workflows.',
+      'Patient, Doctor and Admin roles appear in API authorization and application services.',
+      'Authentication services use JWT and BCrypt password hashing; the API separates controllers, DTOs, interfaces and services.',
     ],
   },
   {
@@ -89,22 +170,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'care',
-    title: 'Software with a purpose.',
-    category: 'fullstack',
-    subtitle: 'Care Point · Healthcare system',
-    description:
-      'A full-stack healthcare system project built with C#, focused on bringing healthcare workflows into one application.',
-    tags: ['C#', '.NET', 'Full stack'],
-    repo: 'Care-Point-Project',
-    visual: 'care',
-    details: [
-      'Public full-stack healthcare system repository.',
-      'C# is the primary repository language.',
-      'Review the source for implementation details; a detailed case study will be added later.',
-    ],
-  },
-  {
     id: 'unity',
     title: 'Small worlds. Big curiosity.',
     category: 'games',
@@ -118,6 +183,22 @@ export const projects: Project[] = [
       'A public C# 2D game development repository.',
       'Part of my continued exploration of Unity and game development.',
       'The visual shown here is a portfolio illustration, not an in-game screenshot.',
+    ],
+  },
+  {
+    id: 'final-year-game',
+    title: 'The final-year build.',
+    category: 'games',
+    subtitle: 'Final-year project · Game development',
+    description:
+      'The game I created for my final-year project, bringing my academic work and interest in interactive experiences together.',
+    tags: ['Final-year project', 'Game development'],
+    repo: 'MyFinalYearProject',
+    visual: 'research',
+    details: [
+      'A game created as my final-year project.',
+      'The linked repository is the dedicated source location supplied for this project.',
+      'The preview is a portfolio concept illustration, not a gameplay screenshot.',
     ],
   },
 ];

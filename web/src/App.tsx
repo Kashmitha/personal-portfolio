@@ -126,6 +126,7 @@ export default function App() {
       categories={categories}
       projects={projects.map((project) => ({
         title: project.subtitle,
+        local: project.featured,
         category: project.category,
         year: 'GITHUB',
         summary: project.description,
