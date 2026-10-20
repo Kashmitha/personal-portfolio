@@ -1,0 +1,470 @@
+.project-visual {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  background: #141b1b;
+  color: #ced6d1;
+  padding: 21px 25px;
+  font-family: 'DM Sans', sans-serif;
+}
+.preview-top {
+  display: flex;
+  justify-content: space-between;
+  font:
+    8px 'IBM Plex Mono',
+    monospace;
+  color: #95a497;
+  align-items: center;
+}
+.preview-top > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tiny-status {
+  font-size: 7px;
+  color: #98ae89;
+}
+.visual-pipeline {
+  background: radial-gradient(ellipse at 50% 100%, #293529, transparent 75%), #17201b;
+}
+.pipeline {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 39px 8px 24px;
+  position: relative;
+}
+.pipeline:before {
+  position: absolute;
+  content: '';
+  height: 1px;
+  background: #5d7452;
+  top: 23px;
+  left: 12%;
+  right: 12%;
+  opacity: 0.5;
+}
+.pipeline-step {
+  position: relative;
+  text-align: center;
+}
+.pipeline-step > div {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #556c4c;
+  background: #273427;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: #b3cba1;
+  margin-bottom: 11px;
+  position: relative;
+}
+.pipeline-step > span {
+  font:
+    8px 'IBM Plex Mono',
+    monospace;
+  color: #a1af9b;
+}
+.mini-check {
+  position: absolute;
+  right: -4px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: #a1bf88;
+  color: #1b311a;
+  display: grid;
+  place-items: center;
+  width: 13px;
+  height: 13px;
+}
+.code-line {
+  font:
+    8px 'IBM Plex Mono',
+    monospace;
+  border-top: 1px solid #a4b99420;
+  padding-top: 16px;
+  color: #91a388;
+}
+.code-line > span {
+  color: #b3cba1;
+  margin-right: 7px;
+}
+.cursor {
+  animation: blink 1.2s steps(2) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.visual-observability {
+  background: #172024;
+}
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+}
+.metric-row > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.metric-row span {
+  font:
+    7px 'IBM Plex Mono',
+    monospace;
+  color: #92a5ac;
+  letter-spacing: 1px;
+}
+.metric-row b {
+  font:
+    22px 'Space Grotesk',
+    sans-serif;
+  color: #d9e3df;
+}
+.sparkline {
+  font-size: 21px;
+  letter-spacing: 3px;
+  color: #80afa5;
+}
+.chart-grid {
+  height: 67px;
+  display: flex;
+  gap: 5px;
+  align-items: end;
+  margin-top: 10px;
+  background: repeating-linear-gradient(0deg, transparent 0 21px, #768c901a 21px 22px);
+}
+.chart-grid > i {
+  flex: 1;
+  background: linear-gradient(#8aafa1, #5e8c7f30);
+  border-radius: 2px 2px 0 0;
+  min-width: 1px;
+}
+.chart-legend {
+  font:
+    7px 'IBM Plex Mono',
+    monospace;
+  color: #92a5ac;
+  display: flex;
+  gap: 15px;
+  margin-top: 11px;
+}
+.chart-legend span:nth-child(2) {
+  color: #c1ab79;
+}
+.chart-legend span:nth-child(3) {
+  color: #a6a3c2;
+}
+.visual-taskflow {
+  background: #242322;
+  padding: 27px 35px 0;
+}
+.mini-app {
+  background: #efeee9;
+  color: #333831;
+  display: flex;
+  border-radius: 6px 6px 0 0;
+  height: 220px;
+  box-shadow: 0 0 20px #0002;
+  transform: rotate(-2deg);
+  border: 1px solid #fff6;
+}
+.mini-app > aside {
+  width: 40px;
+  border-right: 1px solid #dcded6;
+  padding: 15px 12px;
+}
+.mini-app aside > i {
+  display: block;
+  height: 6px;
+  background: #ced3c7;
+  width: 14px;
+  margin-top: 19px;
+  border-radius: 2px;
+}
+.mini-main {
+  padding: 18px 12px;
+  flex: 1;
+  min-width: 0;
+}
+.mini-title {
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mini-title > span {
+  font-size: 6px;
+  background: #3a4a35;
+  color: #eee;
+  padding: 5px 7px;
+  border-radius: 3px;
+}
+.kanban {
+  display: flex;
+  gap: 7px;
+  margin-top: 17px;
+}
+.kanban > div {
+  flex: 1;
+  min-width: 0;
+}
+.kanban > div > span {
+  font-size: 6px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+.kanban b {
+  font-size: 5px;
+  background: #deded4;
+  border-radius: 2px;
+  padding: 1px 3px;
+}
+.kanban article {
+  background: #fff;
+  border: 1px solid #ddded8;
+  border-radius: 3px;
+  padding: 8px;
+  margin-bottom: 7px;
+}
+.mini-label {
+  display: block;
+  width: 20px;
+  height: 4px;
+  background: #c7d4c1;
+  border-radius: 1px;
+  margin-bottom: 7px;
+}
+.label-1 {
+  background: #e4c7a7;
+}
+.label-2 {
+  background: #b8ccdd;
+}
+.kanban strong {
+  font-size: 6px;
+  line-height: 1.5;
+  display: block;
+}
+.kanban article p {
+  height: 3px;
+  width: 80%;
+  background: #e5e6e1;
+  margin: 6px 0;
+}
+.kanban small {
+  font-size: 5px;
+  color: #899582;
+}
+.visual-space,
+.visual-platform {
+  background: #141b24;
+}
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, #d4dbcc 1px, transparent 1px),
+    radial-gradient(circle, #9ca9ba80 1px, transparent 1px);
+  background-size:
+    62px 57px,
+    91px 87px;
+  background-position:
+    18px 8px,
+    32px 29px;
+  opacity: 0.65;
+}
+.game-caption {
+  position: absolute;
+  top: 28px;
+  left: 27px;
+  font:
+    11px 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 3px;
+  z-index: 2;
+  color: #e1e5d7;
+}
+.game-caption > small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #8c9c9e;
+  margin-top: 9px;
+}
+.planet {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 24%, #526662, #28393b 45%, #172125 75%);
+  right: 60px;
+  top: 86px;
+  box-shadow:
+    -8px -6px 30px #7d9c6f1c,
+    inset 10px 4px 20px #97a18413;
+}
+.spaceship {
+  font-size: 48px;
+  position: absolute;
+  left: 44%;
+  top: 95px;
+  color: #dcddca;
+  transform: rotate(25deg);
+  text-shadow: 0 5px 2px #78958a;
+}
+.spaceship > span {
+  display: block;
+  background: linear-gradient(#edaf72, transparent);
+  width: 8px;
+  height: 40px;
+  position: absolute;
+  top: 48px;
+  left: 14px;
+  filter: blur(2px);
+}
+.meteor {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #766552;
+  border-radius: 40%;
+  transform: rotate(30deg);
+  box-shadow:
+    inset -4px -3px 0 #483e36,
+    0 0 9px #b3864533;
+}
+.meteor-one {
+  right: 55px;
+  top: 45px;
+}
+.meteor-two {
+  left: 45px;
+  bottom: 48px;
+  width: 23px;
+  height: 23px;
+}
+.concept-label {
+  position: absolute;
+  bottom: 12px;
+  left: 25px;
+  color: #80918c;
+  font:
+    6px 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 1px;
+}
+.health-preview {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 100%;
+  padding: 20px 12px;
+}
+.visual-care {
+  background: radial-gradient(ellipse at 80% 50%, #344044, transparent), #1b282c;
+}
+.health-preview > svg {
+  color: #9bc5be;
+  flex-shrink: 0;
+}
+.health-preview small {
+  font:
+    8px 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 2px;
+  color: #89a8a3;
+}
+.health-preview h4 {
+  font-size: 29px;
+  letter-spacing: -1px;
+  margin: 11px 0 0;
+}
+.health-preview p {
+  font-size: 10px;
+  color: #8ea6a4;
+}
+.health-icons {
+  position: absolute;
+  right: 24px;
+  bottom: 19px;
+  display: flex;
+  gap: 12px;
+  color: #78918e;
+}
+.health-icons svg {
+  width: 13px;
+  height: 13px;
+}
+.visual-platform {
+  background: linear-gradient(#222139, #49465a);
+}
+.pixel-moon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 65px;
+  top: 37px;
+  background: #dfd4b4;
+  box-shadow: 0 0 35px #dfd4b422;
+}
+.mountain {
+  position: absolute;
+  width: 85%;
+  height: 140px;
+  bottom: 15px;
+  left: 30%;
+  background: #253733;
+  clip-path: polygon(0 100%, 32% 8%, 42% 30%, 56% 0, 100% 100%);
+}
+.mountain-back {
+  background: #4d5260;
+  bottom: 50px;
+  left: -10%;
+  width: 100%;
+}
+.pixel-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1c2b26;
+  border-top: 8px solid #6d8061;
+  height: 44px;
+}
+.pixel-player {
+  position: absolute;
+  width: 14px;
+  height: 22px;
+  background: #e2aa79;
+  bottom: 44px;
+  left: 45%;
+  box-shadow:
+    0 -9px #e2cfad,
+    5px 0 #ad7456,
+    -5px 0 #ad7456,
+    0 10px #384d4f;
+}
+
+.project-visual svg {
+  display: block;
+  flex-shrink: 0;
+}
+.project-visual p {
+  line-height: 1.6;
+}
+.cursor {
+  animation: blink 1.2s steps(2) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
