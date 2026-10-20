@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Check, Copy, Github } from 'lucide-react';
+import ContactForm from './components/ContactForm';
 import FolderPortfolio from './components/FolderPortfolio';
 import type { FolderCategory, FolderChapter, FolderStep } from './components/FolderPortfolio';
 import { profile, projects } from './data/portfolio';
@@ -71,63 +70,6 @@ const steps: FolderStep[] = [
     duration: 'Keep learning. Keep shipping.',
   },
 ];
-
-function ContactDraft() {
-  const [draft, setDraft] = useState(() => {
-    try {
-      return localStorage.getItem('portfolio-draft') || '';
-    } catch {
-      return '';
-    }
-  });
-  const [copied, setCopied] = useState(false);
-  const [error, setError] = useState('');
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(draft);
-      setCopied(true);
-      setError('');
-      window.setTimeout(() => setCopied(false), 2500);
-    } catch {
-      setError('Copy is unavailable. Select your message and copy it manually.');
-    }
-  };
-  return (
-    <div className="game-contact-draft">
-      <div className="game-draft-top">
-        <span>COMPOSE_MESSAGE.txt</span>
-        <span>LOCAL DRAFT</span>
-      </div>
-      <div className="game-draft-body">
-        <label htmlFor="message">Start the conversation.</label>
-        <p>Prepare a message to share through your preferred channel.</p>
-        <textarea
-          id="message"
-          placeholder="Hi Kashmitha, I’d like to talk about…"
-          value={draft}
-          onChange={(event) => {
-            setDraft(event.target.value);
-            try {
-              localStorage.setItem('portfolio-draft', event.target.value);
-            } catch {}
-          }}
-        />
-        <div className="game-draft-actions">
-          <button onClick={copy} disabled={!draft.trim()}>
-            {copied ? <Check size={16} /> : <Copy size={16} />}{' '}
-            {copied ? 'Message copied' : 'Copy message'}
-          </button>
-          <a href={profile.github} target="_blank" rel="noreferrer">
-            <Github size={16} /> Connect on GitHub ↗
-          </a>
-        </div>
-        <small role="status">
-          {error || 'Saved on this device. No message is sent from this website.'}
-        </small>
-      </div>
-    </div>
-  );
-}
 
 export default function App() {
   return (
@@ -210,7 +152,7 @@ export default function App() {
           href: `${profile.github}?tab=repositories`,
         },
       ]}
-      contactContent={<ContactDraft />}
+      contactContent={<ContactForm />}
       timeZone="Asia/Colombo"
       colors={{ blue: '#6550c9', green: '#236f66', orange: '#ac513c', yellow: '#d5b65f' }}
       defaultTheme="dark"

@@ -851,12 +851,48 @@ img {
 .game-draft-body {
   padding: 24px;
 }
-.game-draft-body label {
+.game-draft-body h3 {
   display: block;
   font:
     500 23px 'Space Grotesk',
     sans-serif;
   letter-spacing: -0.6px;
+  margin: 0;
+}
+.game-draft-body fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.game-draft-body label {
+  display: block;
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--ftp-soft);
+}
+.game-draft-body input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--ftp-line);
+  border-radius: 5px;
+  background: var(--ftp-sheet);
+  color: var(--ftp-ink);
+  padding: 12px 15px;
+  margin-top: 8px;
+  font: inherit;
+  font-size: 13px;
+}
+.game-draft-body :is(input, textarea):focus-visible {
+  outline: 2px solid var(--game-accent);
+  outline-offset: 2px;
+}
+.game-draft-body fieldset:disabled {
+  opacity: 0.65;
+}
+.game-draft-body button:disabled {
+  cursor: wait;
 }
 .game-draft-body p {
   font-size: 12px;
@@ -869,7 +905,7 @@ img {
   min-height: 115px;
   max-height: 350px;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 8px;
   border: 1px solid var(--ftp-line);
   border-radius: 5px;
   background: var(--ftp-sheet);
@@ -1439,7 +1475,7 @@ img {
   .game-draft-body {
     padding: 20px;
   }
-  .game-draft-body label {
+  .game-draft-body h3 {
     font-size: 22px;
   }
   .game-draft-body p {

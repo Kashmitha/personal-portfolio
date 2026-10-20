@@ -75,17 +75,106 @@ test('chapter accordions and workflow tabs navigate correctly', async ({ page })
   await expect(page.locator('.ftp-step-t')).toContainText('Observe');
 });
 
-test('contact draft is preserved locally without claiming delivery', async ({ page }) => {
+test('contact draft persists and invalid forms do not submit', async ({ page }) => {
+  let requests = 0;
+  await page.route('https://formspree.io/f/mzedlggg', async (route) => {
+    requests++;
+    await route.abort();
+  });
   await page.goto('/');
   await page
-    .getByRole('textbox', { name: 'Start the conversation.' })
+    .getByRole('textbox', { name: 'Message', exact: true })
     .fill('Hi Kashmitha, let’s collaborate.');
-  await expect(page.getByRole('status')).toContainText('No message is sent');
+  await expect(page.getByRole('status')).toHaveText('Ready when you are.');
   await page.reload();
-  await expect(page.getByRole('textbox', { name: 'Start the conversation.' })).toHaveValue(
+  await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toHaveValue(
     'Hi Kashmitha, let’s collaborate.',
   );
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toBeFocused();
+  await page.getByRole('textbox', { name: 'Name', exact: true }).fill('Test visitor');
+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill('invalid-email');
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toBeFocused();
+  expect(requests).toBe(0);
   await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
+});
+
+test('contact submission sends reply details and clears the draft only after acceptance', async ({
+  page,
+}) => {
+  let requests = 0;
+  let payload: unknown;
+  let release!: () => void;
+  const responseReady = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('https://formspree.io/f/mzedlggg', async (route) => {
+    requests++;
+    expect(route.request().method()).toBe('POST');
+    expect(route.request().headers().accept).toBe('application/json');
+    payload = route.request().postDataJSON();
+    await responseReady;
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+  });
+  await page.goto('/');
+  await page.getByRole('textbox', { name: 'Name', exact: true }).fill('Test visitor');
+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill('visitor@example.com');
+  await page.getByRole('textbox', { name: 'Message', exact: true }).fill('A project enquiry.');
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+  try {
+    await expect(page.getByRole('button', { name: 'Sending…', exact: true })).toBeDisabled();
+    await expect.poll(() => requests).toBe(1);
+    expect(payload).toEqual({
+      name: 'Test visitor',
+      email: 'visitor@example.com',
+      message: 'A project enquiry.',
+    });
+    expect(await page.evaluate(() => localStorage.getItem('portfolio-draft'))).toBe(
+      'A project enquiry.',
+    );
+  } finally {
+    release();
+  }
+  await expect(page.getByRole('status')).toContainText('submitted successfully');
+  await expect(page.getByRole('textbox', { name: 'Message', exact: true })).toHaveValue('');
+  await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveValue('');
+  expect(await page.evaluate(() => localStorage.getItem('portfolio-draft'))).toBeNull();
+  expect(requests).toBe(1);
+});
+
+test('contact rejection and network failure retain the draft for retry', async ({ page }) => {
+  let mode: 'rejected' | 'offline' | 'limited' = 'rejected';
+  await page.route('https://formspree.io/f/mzedlggg', async (route) => {
+    if (mode === 'offline') return route.abort('failed');
+    await route.fulfill({
+      status: mode === 'limited' ? 429 : 422,
+      contentType: 'application/json',
+      body: '{"errors":[{"message":"Rejected"}]}',
+    });
+  });
+  await page.goto('/');
+  await page.getByRole('textbox', { name: 'Name', exact: true }).fill('Test visitor');
+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill('visitor@example.com');
+  const message = page.getByRole('textbox', { name: 'Message', exact: true });
+  await message.fill('Keep this enquiry.');
+  const submit = page.getByRole('button', { name: 'Send message', exact: true });
+  await submit.click();
+  await expect(page.getByRole('status')).toContainText('could not accept');
+  await expect(message).toHaveValue('Keep this enquiry.');
+  mode = 'offline';
+  await submit.click();
+  await expect(page.getByRole('status')).toContainText('Could not confirm submission');
+  await expect(message).toHaveValue('Keep this enquiry.');
+  mode = 'limited';
+  await submit.click();
+  await expect(page.getByRole('status')).toContainText('sending limit');
+  await expect(submit).toBeEnabled();
+  expect(await page.evaluate(() => localStorage.getItem('portfolio-draft'))).toBe(
+    'Keep this enquiry.',
+  );
+  await page.reload();
+  await expect(message).toHaveValue('Keep this enquiry.');
 });
 
 test('layout fits mobile and desktop, both themes render', async ({ page, isMobile }) => {
