@@ -91,7 +91,7 @@ export interface FolderTabPortfolioTemplateProps {
   role?: string;
   /** Three short labels for every sheet's meta row. */
   disciplines?: string[];
-  /** The masthead and cover wordmark. Letters, digits and basic punctuation. */
+  /** The masthead label. Letters, digits and basic punctuation. */
   word?: string;
   /** The outlined tag behind the wordmark, e.g. "#2026". */
   tag?: string;
@@ -1813,12 +1813,12 @@ export default function FolderTabPortfolioTemplate({
         <div className="ftp-mast-row">
           <div className="ftp-mast-tab">
             <StrokeText
-              text={name}
+              text={word}
               weight={17}
               tracking={20}
               color="#ffffff"
               ligatures={ligatures}
-              label={word + ', ' + name}
+              label={word}
             />
             <span className="ftp-reg" aria-hidden="true">
               [ DEV ]
@@ -1899,12 +1899,12 @@ export default function FolderTabPortfolioTemplate({
             />
             <h1 id={uid + '-cover-h'} style={{ position: 'relative' }}>
               <StrokeText
-                text={word}
+                text={name}
                 className="ftp-cover-word"
                 radiant
                 weight={9}
                 outline={1.9}
-                tracking={22}
+                tracking={10}
                 color="var(--game-accent)"
                 ligatures={ligatures}
                 delay={150}
