@@ -192,6 +192,7 @@ export default function App() {
       steps={steps}
       words={[]}
       email={profile.email}
+      resume={profile.resume}
       contacts={[
         { label: 'LinkedIn', value: 'Connect on LinkedIn', href: profile.linkedin },
         { label: 'GitHub', value: '@Kashmitha', href: profile.github },

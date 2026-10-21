@@ -26,9 +26,9 @@ export const profile = {
   github: 'https://github.com/Kashmitha',
   location: 'Sri Lanka',
   portrait: '/portrait.png',
-  // Set these when your contact details and CV are ready. No placeholder contact links are published.
+  // Optional direct email; the contact form works independently.
   email: '',
-  resume: '',
+  resume: '/cv.pdf',
   linkedin: 'https://www.linkedin.com/in/kashmitha-madushan-362822339/',
 };
 export const experience = [

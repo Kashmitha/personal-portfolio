@@ -16,6 +16,7 @@ import * as React from 'react';
 import { Gamepad2 } from 'lucide-react';
 import ProjectVisual from './ProjectVisual';
 import SocialLogo from './SocialLogo';
+import CvDownload from './CvDownload';
 import type { Project } from '../data/portfolio';
 import '../template.css';
 
@@ -112,6 +113,7 @@ export interface FolderTabPortfolioTemplateProps {
   steps?: FolderStep[];
   words?: FolderWord[];
   email?: string;
+  resume?: string;
   contacts?: FolderLink[];
   /** IANA zone for the footer clock. */
   timeZone?: string;
@@ -1417,6 +1419,7 @@ export default function FolderTabPortfolioTemplate({
   steps = [],
   words = [],
   email = '',
+  resume = '',
   contacts = [],
   timeZone = 'Asia/Colombo',
   colors,
@@ -1932,6 +1935,7 @@ export default function FolderTabPortfolioTemplate({
                     <Arrow dir="ne" />
                   </span>
                 </button>
+                <CvDownload href={resume} />
                 <button className="game-about-link" onClick={() => goTo('about')}>
                   Meet the builder <Arrow dir="down" />
                 </button>
@@ -2554,6 +2558,10 @@ export default function FolderTabPortfolioTemplate({
               </Folder>
             )}
             {contactContent}
+            <div className="game-cv-contact">
+              <p>My experience, in one document.</p>
+              <CvDownload href={resume} />
+            </div>
             {contacts.length > 0 && (
               <Folder
                 tone="sheet"
