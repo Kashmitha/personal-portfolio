@@ -1432,6 +1432,7 @@ export default function FolderTabPortfolioTemplate({
 }: FolderTabPortfolioTemplateProps) {
   const uid = React.useId().replace(/:/g, '');
   const rootRef = React.useRef(null as HTMLDivElement | null);
+  const navRef = React.useRef(null as HTMLDivElement | null);
   const sheetRefs = React.useRef({} as Partial<Record<FolderSectionId, HTMLElement | null>>);
   const linkRefs = React.useRef({} as Partial<Record<FolderSectionId, HTMLButtonElement | null>>);
   const listRef = React.useRef(null as HTMLDivElement | null);
@@ -1460,6 +1461,42 @@ export default function FolderTabPortfolioTemplate({
     } catch {}
   }, [theme]);
   const [current, setCurrent] = React.useState<FolderSectionId>('cover');
+  const [navHidden, setNavHidden] = React.useState(false);
+
+  // Reclaim reading space on phones; a short upward scroll brings navigation back.
+  React.useEffect(() => {
+    const mobile = window.matchMedia('(max-width: 720px)');
+    let lastY = window.scrollY;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = Math.max(
+        0,
+        Math.min(window.scrollY, document.documentElement.scrollHeight - window.innerHeight),
+      );
+      if (!mobile.matches || y <= 120 || navRef.current?.querySelector(':focus-visible')) {
+        setNavHidden(false);
+        lastY = y;
+      } else if (Math.abs(y - lastY) >= 10) {
+        setNavHidden(y > lastY);
+        lastY = y;
+      }
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    const onBreakpointChange = () => {
+      lastY = window.scrollY;
+      setNavHidden(false);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    mobile.addEventListener('change', onBreakpointChange);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      mobile.removeEventListener('change', onBreakpointChange);
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
   const [chapter, setChapter] = React.useState(0);
   const [filter, setFilter] = React.useState('all');
   const [step, setStep] = React.useState(0);
@@ -1836,7 +1873,13 @@ export default function FolderTabPortfolioTemplate({
       </header>
 
       {/* sticky nav */}
-      <div className="ftp-navwrap" inert={openProject != null}>
+      <div
+        ref={navRef}
+        className="ftp-navwrap"
+        data-hidden={navHidden}
+        onFocusCapture={() => setNavHidden(false)}
+        inert={openProject != null}
+      >
         <nav className="ftp-nav" aria-label="Portfolio pages">
           <span className="ftp-count" aria-hidden="true">
             {pad2(pageNo(current))}

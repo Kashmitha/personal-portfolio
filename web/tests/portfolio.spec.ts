@@ -236,6 +236,36 @@ test('contact rejection and network failure retain the draft for retry', async (
   await expect(message).toHaveValue('Keep this enquiry.');
 });
 
+test('mobile navigation hides while reading and returns on upward scroll or focus', async ({
+  page,
+  isMobile,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const navigation = page.locator('.ftp-navwrap');
+  await expect(navigation).toHaveAttribute('data-hidden', 'false');
+  await page.evaluate(() => window.scrollTo({ top: 700, behavior: 'instant' }));
+  if (isMobile) {
+    await expect(navigation).toHaveAttribute('data-hidden', 'true');
+    await expect(navigation).toHaveCSS('opacity', '0');
+    expect(
+      await navigation.evaluate((element) => element.getBoundingClientRect().bottom),
+    ).toBeLessThan(0);
+    await page.evaluate(() => window.scrollTo({ top: 640, behavior: 'instant' }));
+    await expect(navigation).toHaveAttribute('data-hidden', 'false');
+    await expect(navigation).toHaveCSS('opacity', '1');
+    await page.evaluate(() => window.scrollTo({ top: 900, behavior: 'instant' }));
+    await expect(navigation).toHaveAttribute('data-hidden', 'true');
+    await navigation.getByRole('button', { name: 'Cover', exact: true }).focus();
+    await expect(navigation).toHaveAttribute('data-hidden', 'false');
+  } else {
+    await expect(navigation).toHaveAttribute('data-hidden', 'false');
+    await expect(navigation).toHaveCSS('opacity', '1');
+  }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(navigation).toHaveAttribute('data-hidden', 'false');
+});
+
 test('layout fits mobile and desktop, both themes render', async ({ page, isMobile }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
