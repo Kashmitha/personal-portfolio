@@ -31,6 +31,14 @@ export const profile = {
   resume: '',
   linkedin: 'https://www.linkedin.com/in/kashmitha-madushan-362822339/',
 };
+export const experience = [
+  {
+    from: 'September 2026',
+    to: 'Present',
+    title: 'Associate DevOps Engineer',
+    place: 'Port City BPO · Colombo District, Western Province, Sri Lanka',
+  },
+];
 export const projects: Project[] = [
   {
     id: 'gemops',

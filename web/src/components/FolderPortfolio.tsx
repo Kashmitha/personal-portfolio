@@ -15,6 +15,7 @@
 import * as React from 'react';
 import { Gamepad2 } from 'lucide-react';
 import ProjectVisual from './ProjectVisual';
+import SocialLogo from './SocialLogo';
 import type { Project } from '../data/portfolio';
 import '../template.css';
 
@@ -2204,10 +2205,10 @@ export default function FolderTabPortfolioTemplate({
                 </div>
               )}
               {timeline.length > 0 && (
-                <div className="ftp-tl">
-                  <span className="ftp-badge" style={{ background: palette.blue, color: '#fff' }}>
-                    Work experience
-                  </span>
+                <section className="ftp-tl" aria-labelledby="experience-title">
+                  <h3 id="experience-title" className="game-experience-title">
+                    Experience
+                  </h3>
                   <ol className="ftp-tl-track" style={{ '--n': timeline.length } as Vars}>
                     {timeline.map((t, i) => (
                       <li
@@ -2219,7 +2220,7 @@ export default function FolderTabPortfolioTemplate({
                         tabIndex={0}
                       >
                         <span className="ftp-tl-date" style={{ display: 'block' }}>
-                          {t.from}–{t.to}
+                          {t.from} – {t.to}
                         </span>
                         <span className="ftp-tl-dot" />
                         <span style={{ display: 'block' }}>
@@ -2231,7 +2232,7 @@ export default function FolderTabPortfolioTemplate({
                       </li>
                     ))}
                   </ol>
-                </div>
+                </section>
               )}
               {contacts.length > 0 && (
                 <div className="ftp-contacts">
@@ -2240,7 +2241,7 @@ export default function FolderTabPortfolioTemplate({
                     const inner = (
                       <>
                         <i style={{ background: palette[tone], color: '#fff' }}>
-                          {c.label.slice(0, 1)}
+                          <SocialLogo href={c.href} />
                         </i>
                         {c.value}
                       </>
@@ -2572,6 +2573,7 @@ export default function FolderTabPortfolioTemplate({
                       target={c.href ? '_blank' : undefined}
                       rel="noreferrer"
                     >
+                      <SocialLogo href={c.href} />
                       <span>
                         <small>{c.label}</small>
                         {c.value}
@@ -2723,7 +2725,7 @@ export default function FolderTabPortfolioTemplate({
                   </div>
                   {project.href && (
                     <a className="ftp-btn" href={project.href} target="_blank" rel="noreferrer">
-                      Source code <Arrow dir="ne" />
+                      <SocialLogo href={project.href} /> Source code <Arrow dir="ne" />
                     </a>
                   )}
                 </div>

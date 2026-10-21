@@ -1,7 +1,8 @@
 import ContactForm from './components/ContactForm';
+import SocialLogo from './components/SocialLogo';
 import FolderPortfolio from './components/FolderPortfolio';
 import type { FolderCategory, FolderChapter, FolderStep } from './components/FolderPortfolio';
-import { profile, projects } from './data/portfolio';
+import { experience, profile, projects } from './data/portfolio';
 
 const categories: FolderCategory[] = [
   { id: 'devops', label: 'DevOps & Cloud', local: 'Deploy. Scale.', tone: 'blue', kind: 'render' },
@@ -130,6 +131,7 @@ export default function App() {
             </li>
           </ol>
           <a href={`${profile.github}/gemops-project`} target="_blank" rel="noreferrer">
+            <SocialLogo href={profile.github} />
             Explore GemOps <span aria-hidden="true">↗</span>
           </a>
         </section>
@@ -167,7 +169,7 @@ export default function App() {
           lines: ['Unity engine', 'C# scripting', '2D game projects', 'Interactive experiences'],
         },
       ]}
-      timeline={[]}
+      timeline={experience}
       categories={categories}
       projects={projects.map((project) => ({
         title: project.subtitle,

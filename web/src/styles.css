@@ -1933,3 +1933,86 @@ img {
     margin-inline: auto;
   }
 }
+
+/* Work history stays readable and compact within the About sheet. */
+.gaming-portfolio .ftp-tl {
+  margin-top: 22px;
+  padding: 20px;
+  border: 1px solid var(--ftp-line);
+  border-left: 4px solid var(--game-accent);
+  border-radius: 10px;
+  background: var(--ftp-ghost);
+}
+.gaming-portfolio .game-experience-title {
+  margin: 0;
+  color: var(--ftp-ink);
+  font:
+    600 22px/1.3 'Space Grotesk',
+    sans-serif;
+}
+.gaming-portfolio .ftp-tl-track {
+  margin: 12px 0 0;
+  padding: 0;
+}
+.gaming-portfolio .ftp-tl-track::before,
+.gaming-portfolio .ftp-tl-dot {
+  display: none;
+}
+.gaming-portfolio .ftp-tl-item {
+  padding: 0;
+}
+.gaming-portfolio .ftp-tl-date {
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: normal;
+  color: var(--game-accent);
+  filter: none;
+  opacity: 1;
+}
+.gaming-portfolio .ftp-tl-title {
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.gaming-portfolio .ftp-tl-place {
+  display: block;
+  margin-top: 4px;
+  color: var(--ftp-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.gaming-portfolio .social-logo {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  vertical-align: middle;
+}
+.gaming-portfolio .ftp-contact i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.gaming-portfolio .ftp-else a {
+  gap: 12px;
+}
+.gaming-portfolio .ftp-else a > span {
+  flex: 1;
+  min-width: 0;
+}
+.gaming-portfolio .ftp-else .social-logo {
+  width: 24px;
+  height: 24px;
+  flex-basis: 24px;
+  transform: none;
+}
+.gaming-portfolio .ftp-else .social-logo[data-brand='linkedin'] {
+  color: #0a66c2;
+}
+.gaming-portfolio[data-theme='dark'] .ftp-else .social-logo[data-brand='linkedin'] {
+  color: #71b7ff;
+}
+.gaming-portfolio .game-build-note a > span {
+  margin-left: auto;
+}
