@@ -2016,3 +2016,60 @@ img {
 .gaming-portfolio .game-build-note a > span {
   margin-left: auto;
 }
+
+/* Footer information should be readable at normal browser zoom. */
+.gaming-portfolio .ftp-foot {
+  gap: 20px 28px;
+  margin-top: 12px;
+  padding: 24px 4px 36px;
+  border-top: 1px solid var(--ftp-line);
+  color: var(--ftp-ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.gaming-portfolio .ftp-foot small {
+  margin-top: 6px;
+  color: var(--ftp-soft);
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+.gaming-portfolio .game-footer-note {
+  color: var(--ftp-soft);
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+.gaming-portfolio .ftp-foot .ftp-clock {
+  color: var(--ftp-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.gaming-portfolio .ftp-foot .ftp-top {
+  min-height: 44px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+.gaming-portfolio .ftp-top svg {
+  width: 16px;
+  height: 16px;
+}
+.gaming-portfolio .ftp-foot-n {
+  font-size: 40px;
+  line-height: 1.2;
+}
+@media (max-width: 600px) {
+  .gaming-portfolio .ftp-foot {
+    gap: 16px 20px;
+    padding-inline: 0;
+  }
+  .gaming-portfolio .ftp-foot > span:first-child {
+    flex-basis: 100%;
+  }
+  .gaming-portfolio .game-footer-note {
+    display: block;
+    flex-basis: 100%;
+  }
+}
