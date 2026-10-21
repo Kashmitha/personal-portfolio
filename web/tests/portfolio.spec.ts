@@ -61,6 +61,19 @@ test('category tabs support keyboard filtering and theme persists', async ({ pag
 test('chapter accordions and workflow tabs navigate correctly', async ({ page }) => {
   await page.goto('/');
   const chapters = page.locator('.ftp-band');
+  const about = page.locator('[data-sheet="about"]');
+  await expect(about.locator('.game-about-copy')).toContainText('DevOps and Cloud');
+  await expect(about.locator('.game-role-card').getByRole('heading', { level: 3 })).toHaveText([
+    '01 / DevOps & Cloud Engineer',
+    '02 / Full-stack .NET Developer',
+    '03 / Unity Game Developer',
+  ]);
+  await expect(about).not.toContainText(/final.year.*undergraduate/i);
+  for (const section of ['about', 'contact']) {
+    await expect(
+      page.locator(`[data-sheet="${section}"]`).getByRole('link', { name: /LinkedIn/ }),
+    ).toHaveAttribute('href', 'https://www.linkedin.com/in/kashmitha-madushan-362822339/');
+  }
   for (const [index, tone] of ['blue', 'green', 'orange', 'yellow'].entries()) {
     await expect(chapters.nth(index)).toHaveAttribute('data-tone', tone);
     await chapters.nth(index).getByRole('button').first().click();

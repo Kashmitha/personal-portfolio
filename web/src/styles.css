@@ -1745,3 +1745,191 @@ img {
     stroke: var(--wordmark-lime);
   }
 }
+
+/* Readable About copy and role cards, scoped to preserve the folder layout. */
+.gaming-portfolio .ftp-about > div:last-child {
+  min-width: 0;
+}
+.gaming-portfolio .game-about-copy {
+  margin-top: 16px;
+  max-width: 70ch;
+  color: var(--ftp-ink);
+  font-size: 17px;
+  line-height: 1.65;
+}
+.gaming-portfolio .game-about-copy p {
+  margin: 0 0 12px;
+}
+.gaming-portfolio .game-about-copy .game-about-focus {
+  color: var(--game-accent);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.gaming-portfolio .ftp-about .ftp-cols {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.gaming-portfolio .ftp-about .game-role-card {
+  display: block;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--ftp-line);
+  border-top: 4px solid #236f66;
+  border-radius: 12px;
+  background: var(--ftp-ghost);
+}
+.gaming-portfolio .ftp-about .game-role-card:first-child {
+  border-top-color: var(--game-accent);
+}
+.gaming-portfolio .ftp-about .game-role-card[data-tone='orange'] {
+  border-top-color: #ac513c;
+}
+.gaming-portfolio .game-role-card .ftp-badge {
+  display: block;
+  height: auto;
+  margin: 0;
+  padding: 8px;
+  font:
+    600 16px/1.4 'Space Grotesk',
+    sans-serif;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+.gaming-portfolio .game-role-description {
+  margin: 12px 0 8px;
+  color: var(--ftp-ink);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.gaming-portfolio .ftp-about .ftp-cols ul {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ftp-ink);
+}
+.gaming-portfolio .ftp-about .ftp-contact {
+  min-height: 44px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.gaming-portfolio .ftp-else a {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+.gaming-portfolio .ftp-else small {
+  font-size: 12px;
+}
+@media (max-width: 700px) {
+  .gaming-portfolio .ftp-about .ftp-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .gaming-portfolio .ftp-about .game-role-card {
+    padding: 14px;
+  }
+}
+
+/* A useful companion to the portrait, rather than an empty left column. */
+.gaming-portfolio .game-about-sidebar {
+  min-width: 0;
+  width: 100%;
+  max-width: 330px;
+  align-self: start;
+}
+.gaming-portfolio .game-build-note {
+  margin-top: 26px;
+  padding: 22px;
+  border: 1px solid var(--ftp-line);
+  border-radius: 12px;
+  background: var(--ftp-ghost);
+  color: var(--ftp-ink);
+}
+.gaming-portfolio .game-build-note-label {
+  color: var(--game-accent);
+  font:
+    500 11px/1.5 'IBM Plex Mono',
+    monospace;
+  letter-spacing: 0.08em;
+}
+.gaming-portfolio .game-build-note h3 {
+  margin: 12px 0 6px;
+  font:
+    600 25px/1.2 'Space Grotesk',
+    sans-serif;
+}
+.gaming-portfolio .game-build-note p {
+  margin: 0;
+  color: var(--ftp-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.gaming-portfolio .game-build-note ol {
+  list-style: none;
+  counter-reset: build-step;
+  margin: 22px 0;
+  padding: 0;
+}
+.gaming-portfolio .game-build-note li {
+  counter-increment: build-step;
+  position: relative;
+  padding: 0 0 20px 34px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.gaming-portfolio .game-build-note li:last-child {
+  padding-bottom: 0;
+}
+.gaming-portfolio .game-build-note li::before {
+  content: '0' counter(build-step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: var(--game-accent);
+  font:
+    500 12px/1.8 'IBM Plex Mono',
+    monospace;
+}
+.gaming-portfolio .game-build-note li strong,
+.gaming-portfolio .game-build-note li span {
+  display: block;
+}
+.gaming-portfolio .game-build-note li span {
+  color: var(--ftp-soft);
+}
+.gaming-portfolio .game-build-note a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ftp-line);
+  color: var(--game-accent);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.gaming-portfolio .game-build-note a:focus-visible {
+  outline: 2px solid var(--game-accent);
+  outline-offset: 4px;
+}
+.gaming-portfolio .ftp-about .game-role-card ul {
+  list-style: disc outside;
+  padding-left: 19px;
+}
+.gaming-portfolio .ftp-about .game-role-card li {
+  display: list-item;
+  padding-left: 2px;
+  margin-bottom: 5px;
+}
+.gaming-portfolio .game-role-card li::marker {
+  color: var(--game-accent);
+}
+@media (max-width: 900px) {
+  .gaming-portfolio .game-about-sidebar {
+    max-width: 390px;
+    margin-inline: auto;
+  }
+}

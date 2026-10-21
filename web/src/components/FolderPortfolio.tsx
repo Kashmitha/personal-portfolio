@@ -51,7 +51,12 @@ export type FolderProject = {
   mark?: string;
 };
 
-export type FolderHighlight = { label: string; tone?: FolderTone; lines: string[] };
+export type FolderHighlight = {
+  label: string;
+  tone?: FolderTone;
+  description?: string;
+  lines: string[];
+};
 export type FolderTimelineItem = { from: string; to: string; title: string; place?: string };
 export type FolderChapter = {
   title: string;
@@ -93,6 +98,8 @@ export interface FolderTabPortfolioTemplateProps {
   /** The three notes on the right of the masthead. */
   notes?: string[];
   blurb?: string;
+  about?: React.ReactNode[];
+  aboutAside?: React.ReactNode;
   greeting?: string;
   /** An image URL, your own node, or nothing for the illustrated photo. */
   photo?: string | React.ReactNode;
@@ -1397,6 +1404,8 @@ export default function FolderTabPortfolioTemplate({
   subtitle = ['Engineer.', 'Build. Play.'],
   notes = ['CODE', 'DEPLOY', 'RESPAWN'],
   blurb = 'Building reliable infrastructure, thoughtful applications, and interactive worlds.',
+  about = [],
+  aboutAside,
   greeting = 'Hi, I am',
   photo,
   highlights = [],
@@ -2103,43 +2112,46 @@ export default function FolderTabPortfolioTemplate({
           {meta('about')}
           {head('about', '#' + firstName, 'About me', { withSig: true })}
           <div className="ftp-about">
-            <div
-              className="ftp-photo"
-              ref={photoRef}
-              onPointerMove={onPhotoMove}
-              onPointerLeave={onPhotoLeave}
-            >
-              <Folder
-                tone="blue"
-                tabAt={0.08}
-                tab={initialsOf(name) + ' · ' + handle.replace(/^@/, '').split('.')[0]}
-                bodyClass="ftp-photo-body"
+            <div className="game-about-sidebar">
+              <div
+                className="ftp-photo"
+                ref={photoRef}
+                onPointerMove={onPhotoMove}
+                onPointerLeave={onPhotoLeave}
               >
-                <div className="ftp-photo-frame">
-                  {typeof photo === 'string' ? (
-                    <img
-                      src={photo}
-                      alt={name}
-                      width={300}
-                      height={360}
-                      style={{ maxWidth: 'none' }}
+                <Folder
+                  tone="blue"
+                  tabAt={0.08}
+                  tab={initialsOf(name) + ' · ' + handle.replace(/^@/, '').split('.')[0]}
+                  bodyClass="ftp-photo-body"
+                >
+                  <div className="ftp-photo-frame">
+                    {typeof photo === 'string' ? (
+                      <img
+                        src={photo}
+                        alt={name}
+                        width={300}
+                        height={360}
+                        style={{ maxWidth: 'none' }}
+                      />
+                    ) : photo != null ? (
+                      photo
+                    ) : (
+                      <PhotoScene name={name} seed={hashString(name)} />
+                    )}
+                  </div>
+                  <div className="ftp-photo-glass" style={{ color: 'var(--ftp-blue)' }}>
+                    <PalmIcon size={28} />
+                    <StrokeText
+                      text={years.split(/[–-]/).pop() || years}
+                      weight={9}
+                      color="var(--ftp-ink)"
+                      decorative
                     />
-                  ) : photo != null ? (
-                    photo
-                  ) : (
-                    <PhotoScene name={name} seed={hashString(name)} />
-                  )}
-                </div>
-                <div className="ftp-photo-glass" style={{ color: 'var(--ftp-blue)' }}>
-                  <PalmIcon size={28} />
-                  <StrokeText
-                    text={years.split(/[–-]/).pop() || years}
-                    weight={9}
-                    color="var(--ftp-ink)"
-                    decorative
-                  />
-                </div>
-              </Folder>
+                  </div>
+                </Folder>
+              </div>
+              {aboutAside}
             </div>
             <div>
               <p className="ftp-hi">
@@ -2162,14 +2174,17 @@ export default function FolderTabPortfolioTemplate({
                   ) : null}
                 </span>
               </p>
-              <p className="ftp-kicker" style={{ marginTop: 12, maxWidth: 560 }}>
-                {blurb}
-              </p>
+              <div className="game-about-copy">
+                <p className="game-about-focus">DevOps & Cloud · My primary focus</p>
+                {(about.length ? about : [blurb]).map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
               {highlights.length > 0 && (
                 <div className="ftp-cols">
                   {highlights.map((h, i) => (
-                    <div key={h.label + i}>
-                      <span
+                    <div className="game-role-card" data-tone={h.tone} key={h.label + i}>
+                      <h3
                         className="ftp-badge"
                         style={{
                           background: palette[h.tone ?? (i % 2 ? 'blue' : 'green')],
@@ -2177,7 +2192,8 @@ export default function FolderTabPortfolioTemplate({
                         }}
                       >
                         {h.label}
-                      </span>
+                      </h3>
+                      {h.description && <p className="game-role-description">{h.description}</p>}
                       <ul>
                         {h.lines.map((l) => (
                           <li key={l}>{l}</li>

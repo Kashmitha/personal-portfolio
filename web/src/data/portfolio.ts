@@ -29,7 +29,7 @@ export const profile = {
   // Set these when your contact details and CV are ready. No placeholder contact links are published.
   email: '',
   resume: '',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/kashmitha-madushan-362822339/',
 };
 export const projects: Project[] = [
   {

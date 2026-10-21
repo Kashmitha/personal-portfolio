@@ -90,6 +90,17 @@ export default function App() {
       subtitle={['Engineer.', 'Build. Play.']}
       notes={['CODE', 'DEPLOY', 'RESPAWN']}
       blurb="Building reliable infrastructure, thoughtful .NET applications, and interactive worlds. Based in Sri Lanka. Driven by curiosity."
+      about={[
+        'I’m Kashmitha Madushan, a DevOps and Cloud engineer from Sri Lanka. I build infrastructure that deploys itself, scales cleanly, and tells you when something’s wrong.',
+        <>
+          I work across AWS and Azure with Terraform, Ansible, Docker, and Kubernetes, and I
+          automate delivery with GitHub Actions and Jenkins. My main project,{' '}
+          <strong>GemOps</strong>, brings it together on AWS EKS with Helm, monitoring, logging,
+          alerting, and secrets management in one platform.
+        </>,
+        'I also build full-stack apps in C# and React, so I understand what software needs from the infrastructure underneath it. I like breaking big problems into clear steps and turning them into repeatable automation.',
+        'I also enjoy building 2D games with Unity and C#, exploring player movement, animation, and interactive experiences.',
+      ]}
       photo={
         <img
           src={profile.portrait}
@@ -99,10 +110,36 @@ export default function App() {
           fetchPriority="high"
         />
       }
+      aboutAside={
+        <section className="game-build-note" aria-labelledby="build-note-title">
+          <span className="game-build-note-label">FIELD NOTES / 01</span>
+          <h3 id="build-note-title">How I build.</h3>
+          <p>From infrastructure to insight.</p>
+          <ol>
+            <li>
+              <strong>Define it.</strong>
+              <span>Infrastructure as code with Terraform and Ansible.</span>
+            </li>
+            <li>
+              <strong>Deliver it.</strong>
+              <span>Containers and repeatable CI/CD pipelines.</span>
+            </li>
+            <li>
+              <strong>Understand it.</strong>
+              <span>Metrics, logs, and alerts that make systems observable.</span>
+            </li>
+          </ol>
+          <a href={`${profile.github}/gemops-project`} target="_blank" rel="noreferrer">
+            Explore GemOps <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+      }
       highlights={[
         {
-          label: '01 / DevOps',
+          label: '01 / DevOps & Cloud Engineer',
           tone: 'blue',
+          description:
+            'My primary discipline: infrastructure, automated delivery, and visibility into running systems.',
           lines: [
             'AWS & Azure',
             'Docker & Kubernetes',
@@ -111,8 +148,10 @@ export default function App() {
           ],
         },
         {
-          label: '02 / Full stack',
+          label: '02 / Full-stack .NET Developer',
           tone: 'green',
+          description:
+            'Connecting useful interfaces with structured APIs and data-driven applications.',
           lines: [
             'C# & ASP.NET Core',
             'React interfaces',
@@ -121,8 +160,10 @@ export default function App() {
           ],
         },
         {
-          label: '03 / Game dev',
+          label: '03 / Unity Game Developer',
           tone: 'orange',
+          description:
+            'Exploring interactive experiences through C# scripting and 2D game development.',
           lines: ['Unity engine', 'C# scripting', '2D game projects', 'Interactive experiences'],
         },
       ]}
@@ -150,6 +191,7 @@ export default function App() {
       words={[]}
       email={profile.email}
       contacts={[
+        { label: 'LinkedIn', value: 'Connect on LinkedIn', href: profile.linkedin },
         { label: 'GitHub', value: '@Kashmitha', href: profile.github },
         {
           label: 'Repositories',
