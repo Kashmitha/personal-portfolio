@@ -60,6 +60,12 @@ test('category tabs support keyboard filtering and theme persists', async ({ pag
 
 test('chapter accordions and workflow tabs navigate correctly', async ({ page }) => {
   await page.goto('/');
+  const chapters = page.locator('.ftp-band');
+  for (const [index, tone] of ['blue', 'green', 'orange', 'yellow'].entries()) {
+    await expect(chapters.nth(index)).toHaveAttribute('data-tone', tone);
+    await chapters.nth(index).getByRole('button').first().click();
+    await expect(chapters.nth(index)).toHaveAttribute('data-tone', tone);
+  }
   const chapter = page.getByRole('button', { name: /The project archive/ });
   await chapter.click();
   await expect(chapter).toHaveAttribute('aria-expanded', 'true');
@@ -99,6 +105,10 @@ test('all ten curated projects link to their dedicated repositories', async ({ p
       'href',
       `https://github.com/Kashmitha/${repository}`,
     );
+    if (repository === 'MyFinalYearProject') {
+      await expect(dialog).toContainText('Unity 2022.3.43f1');
+      await expect(dialog).toContainText('grounded jumping');
+    }
     await dialog.getByRole('button', { name: 'Close details' }).click();
     await expect(dialog).not.toBeVisible();
   }

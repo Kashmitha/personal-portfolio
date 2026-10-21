@@ -25,10 +25,7 @@
   font-size: 7px;
   color: #98ae89;
 }
-.visual-pipeline,
-.visual-terraform,
-.visual-ansible,
-.visual-containers {
+.visual-pipeline {
   background: radial-gradient(ellipse at 50% 100%, #293529, transparent 75%), #17201b;
 }
 .pipeline {
@@ -267,8 +264,7 @@
   color: #899582;
 }
 .visual-space,
-.visual-platform,
-.visual-research {
+.visual-platform {
   background: #141b24;
 }
 .stars {
@@ -407,8 +403,7 @@
   width: 13px;
   height: 13px;
 }
-.visual-platform,
-.visual-research {
+.visual-platform {
   background: linear-gradient(#222139, #49465a);
 }
 .pixel-moon {
@@ -461,6 +456,379 @@
 .project-visual svg {
   display: block;
   flex-shrink: 0;
+}
+
+/* Each project uses a distinct composition and a palette from the portfolio. */
+.visual-terraform {
+  background: radial-gradient(ellipse at 80% 10%, #244f68, transparent 70%), #111f30;
+  color: #c6e7f4;
+}
+.terraform-map {
+  position: absolute;
+  inset: 56px 25px 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(68px, 0.45fr);
+  gap: 16px;
+  align-items: center;
+  font:
+    8px 'IBM Plex Mono',
+    monospace;
+}
+.tf-resource-group {
+  border: 1px dashed #77b5d9;
+  border-radius: 9px;
+  padding: 10px;
+}
+.tf-resource-group > span {
+  color: #93cceb;
+  font-size: 7px;
+}
+.tf-vnet {
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid #4e90b5;
+  background: #17394c;
+  border-radius: 5px;
+}
+.tf-vnet > small {
+  font-size: 6px;
+  color: #a8c9db;
+}
+.tf-compute {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-block: 10px;
+}
+.tf-compute small,
+.tf-state small {
+  display: block;
+  font-size: 6px;
+  margin-top: 5px;
+  color: #91b4c7;
+}
+.tf-boundary {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 5px;
+  color: #9bd2bb;
+}
+.tf-state {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  padding: 16px 5px;
+  border-block: 1px solid #5785a6;
+  color: #9dd7f2;
+  font-size: 6px;
+}
+.visual-ansible {
+  background: radial-gradient(ellipse at 20% 100%, #493e2a, transparent 70%), #24211b;
+}
+.ansible-terminal {
+  position: absolute;
+  inset: 52px 25px 20px;
+  border: 1px solid #86704b;
+  border-radius: 7px;
+  padding: 12px 16px;
+  background: #171b19;
+  font:
+    8px 'IBM Plex Mono',
+    monospace;
+  color: #c5c7ad;
+}
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ffffff15;
+}
+.terminal-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #b98a61;
+}
+.terminal-dots i:nth-child(2) {
+  background: #d5b65f;
+}
+.terminal-dots i:nth-child(3) {
+  background: #7d9c6f;
+}
+.terminal-dots span {
+  margin-left: auto;
+  font-size: 6px;
+  color: #9b9d8d;
+}
+.ansible-terminal p {
+  margin-block: 10px !important;
+  font-size: 8px;
+}
+.ansible-terminal b {
+  color: #e5c67b;
+}
+.ansible-role {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-block: 8px;
+}
+.ansible-role svg {
+  color: #a6c28e;
+}
+.ansible-recap {
+  color: #c6ab6c;
+  font-size: 6px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+.visual-containers {
+  background: radial-gradient(ellipse at 90% 10%, #603e3d, transparent 65%), #291e26;
+}
+.compose-network {
+  position: absolute;
+  inset: 60px 28px 78px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+.compose-service {
+  border: 1px solid #b78472;
+  border-radius: 8px;
+  padding: 15px 8px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  background: #ffffff05;
+  color: #eac5b1;
+}
+.compose-service b {
+  font:
+    15px 'Space Grotesk',
+    sans-serif;
+}
+.compose-service small {
+  font:
+    6px 'IBM Plex Mono',
+    monospace;
+  color: #b6a4aa;
+}
+.compose-link {
+  color: #c59b89;
+  font:
+    7px 'IBM Plex Mono',
+    monospace;
+}
+.jenkins-lane {
+  position: absolute;
+  inset: auto 28px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-top: 1px dashed #b7847280;
+  padding-top: 14px;
+  color: #e1b7a0;
+  font:
+    7px 'IBM Plex Mono',
+    monospace;
+}
+.jenkins-lane span {
+  flex: 1;
+}
+.jenkins-lane small {
+  display: block;
+  font-size: 6px;
+  color: #b6a4aa;
+  margin-top: 6px;
+}
+.visual-research {
+  background: linear-gradient(150deg, #2e2034, #6c4241 68%, #9a6650);
+}
+.research-level {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.research-sun {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #d5b67b;
+  opacity: 0.7;
+  right: 18%;
+  top: 29%;
+  box-shadow: 0 0 55px #d5b67b33;
+}
+.research-pillars {
+  position: absolute;
+  inset: 35% 0 0;
+  display: flex;
+  gap: 12%;
+  align-items: end;
+  padding-inline: 9%;
+}
+.research-pillars i {
+  flex: 1;
+  background: #392d3d;
+  height: 85%;
+  box-shadow: inset 5px 0 #51404a;
+}
+.research-pillars i:nth-child(even) {
+  height: 62%;
+}
+.research-ledge {
+  position: absolute;
+  height: 14px;
+  background: #bba97b;
+  border-bottom: 6px solid #62463f;
+  box-shadow: 0 12px 0 #231e2c;
+}
+.ledge-one {
+  width: 27%;
+  left: 0;
+  bottom: 23%;
+}
+.ledge-two {
+  width: 22%;
+  left: 40%;
+  bottom: 40%;
+}
+.ledge-three {
+  width: 22%;
+  right: 0;
+  bottom: 57%;
+}
+.research-jump-path {
+  position: absolute;
+  width: 30%;
+  height: 25%;
+  left: 22%;
+  bottom: 43%;
+  border-top: 2px dashed #e8cf9d99;
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+.research-player {
+  position: absolute;
+  width: 13px;
+  height: 19px;
+  background: #c6ddc4;
+  left: 45%;
+  bottom: calc(40% + 14px);
+  box-shadow:
+    0 -7px #e4bb8e,
+    5px 3px #688b85,
+    -5px 3px #688b85;
+}
+.research-controls {
+  position: absolute;
+  bottom: 13%;
+  left: 25px;
+  display: flex;
+  gap: 20px;
+  font:
+    6px 'IBM Plex Mono',
+    monospace;
+  color: #f0d8bd;
+}
+.visual-research .concept-label {
+  color: #ddc4b4;
+}
+
+@media (max-width: 600px) {
+  .visual-terraform .tiny-status,
+  .visual-ansible .tiny-status,
+  .visual-containers .tiny-status {
+    display: none;
+  }
+  .terraform-map {
+    inset: 43px 17px 16px;
+    gap: 8px;
+  }
+  .tf-resource-group {
+    padding: 6px;
+  }
+  .tf-vnet {
+    padding: 6px;
+    margin-top: 5px;
+  }
+  .tf-compute {
+    margin-block: 6px;
+    gap: 6px;
+  }
+  .tf-compute svg {
+    width: 18px;
+    height: 18px;
+  }
+  .tf-state {
+    padding-block: 10px;
+  }
+  .ansible-terminal {
+    inset: 43px 17px 15px;
+    padding: 8px 12px;
+  }
+  .ansible-role {
+    font-size: 7px;
+    margin-block: 4px;
+  }
+  .ansible-role svg {
+    width: 10px;
+    height: 10px;
+  }
+  .ansible-terminal p {
+    display: none;
+  }
+  .ansible-recap {
+    margin-top: 8px;
+    font-size: 5px;
+  }
+  .compose-network {
+    inset: 44px 17px 63px;
+    gap: 6px;
+  }
+  .compose-service {
+    padding: 8px 5px;
+    gap: 5px;
+    grid-template-columns: auto 1fr;
+  }
+  .compose-service small {
+    grid-column: 1 / -1;
+  }
+  .compose-service svg {
+    width: 16px;
+    height: 16px;
+  }
+  .compose-service b {
+    font-size: 12px;
+  }
+  .jenkins-lane {
+    inset-inline: 17px;
+    bottom: 15px;
+    padding-top: 8px;
+    gap: 8px;
+  }
+}
+@media (max-width: 370px) {
+  .tf-resource-group > span,
+  .tf-vnet > small,
+  .ansible-recap,
+  .terminal-dots {
+    display: none;
+  }
+  .tf-vnet {
+    margin-top: 0;
+  }
+  .tf-compute {
+    margin-block: 3px;
+  }
+  .tf-boundary {
+    font-size: 4px;
+  }
 }
 .project-visual p {
   line-height: 1.6;

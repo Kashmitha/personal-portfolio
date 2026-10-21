@@ -565,6 +565,24 @@ img {
 .gaming-portfolio .ftp-band > .ftp-fbody {
   border: 1px solid var(--ftp-line);
 }
+.gaming-portfolio .ftp-band[data-open='false'] > .ftp-fbody {
+  --on: var(--ftp-ink);
+  --on2: var(--ftp-muted);
+  background: color-mix(in srgb, var(--c) 18%, var(--ftp-sheet));
+  border-color: color-mix(in srgb, var(--c) 55%, var(--ftp-line));
+}
+.gaming-portfolio .ftp-band[data-open='true'] .ftp-band-t {
+  color: var(--on);
+}
+.gaming-portfolio .ftp-band[data-tone='yellow'],
+.gaming-portfolio .ftp-band[data-tone='yellow'] > .ftp-tabshape {
+  --on: #302913;
+  --on2: #44391b;
+}
+.gaming-portfolio .ftp-band[data-tone='yellow'] .ftp-go {
+  background: #302913;
+  color: #f5e7bd;
+}
 .gaming-portfolio .ftp-band-head {
   height: 82px;
   padding-block: 20px 27px;

@@ -55,6 +55,7 @@ export type FolderHighlight = { label: string; tone?: FolderTone; lines: string[
 export type FolderTimelineItem = { from: string; to: string; title: string; place?: string };
 export type FolderChapter = {
   title: string;
+  tone?: FolderTone;
   local?: string;
   points?: string[];
   target?: FolderSectionId;
@@ -2036,7 +2037,7 @@ export default function FolderTabPortfolioTemplate({
                 return (
                   <Folder
                     key={ch.title + i}
-                    tone={open ? 'blue' : 'sheet'}
+                    tone={ch.tone ?? TONES[i % TONES.length]}
                     tabAt={slot}
                     className="ftp-band"
                     data-open={open ? 'true' : 'false'}

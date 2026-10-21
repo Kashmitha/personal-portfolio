@@ -17,24 +17,28 @@ const categories: FolderCategory[] = [
 const chapters: FolderChapter[] = [
   {
     title: 'The player profile',
+    tone: 'blue',
     local: 'A builder with three disciplines.',
     points: ['DevOps first', '.NET & C#', 'Unity'],
     target: 'about',
   },
   {
     title: 'The project archive',
+    tone: 'green',
     local: 'Real code. Real repositories.',
     points: ['Cloud platforms', 'Applications', 'Games'],
     target: 'work',
   },
   {
     title: 'The build sequence',
+    tone: 'orange',
     local: 'From the first idea to the next release.',
     points: ['Understand', 'Build', 'Automate'],
     target: 'process',
   },
   {
     title: 'The next chapter',
+    tone: 'yellow',
     local: 'Great work starts with a conversation.',
     points: ['Collaborate', 'Connect', 'Build together'],
     target: 'contact',

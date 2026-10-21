@@ -12,35 +12,12 @@ import {
 } from 'lucide-react';
 import type { Project } from '../data/portfolio';
 export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
-  const workflow = {
-    pipeline: {
-      file: 'deployment.yml',
-      steps: ['Commit', 'Build', 'Deploy', 'Monitor'],
-      note: 'Kubernetes / delivery & monitoring',
-    },
-    terraform: {
-      file: 'main.tf',
-      steps: ['Modules', 'Network', 'Compute', 'State'],
-      note: 'Azure / modular infrastructure as code',
-    },
-    ansible: {
-      file: 'configure_all.yml',
-      steps: ['Inventory', 'Roles', 'Configure', 'Harden'],
-      note: 'Azure / repeatable server configuration',
-    },
-    containers: {
-      file: 'Jenkinsfile',
-      steps: ['Webhook', 'Build', 'Test', 'Deploy'],
-      note: 'Nginx + Flask / Docker Compose',
-    },
-  };
-  const deployment = kind in workflow ? workflow[kind as keyof typeof workflow] : undefined;
   return (
     <div className={`project-visual visual-${kind}`} aria-label="Illustrative project preview">
-      {deployment && (
+      {kind === 'pipeline' && (
         <>
           <div className="preview-top">
-            <span>{deployment.file}</span>
+            <span>AKS / deployment.yml</span>
             <span className="tiny-status">● workflow illustration</span>
           </div>
           <div className="pipeline">
@@ -52,13 +29,103 @@ export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
                     <Check size={9} />
                   </span>
                 </div>
-                <span>{deployment.steps[i]}</span>
+                <span>{['Commit', 'Build', 'Deploy', 'Monitor'][i]}</span>
               </div>
             ))}
           </div>
           <div className="code-line">
-            <span>➜</span> {deployment.note}
+            <span>➜</span> Kubernetes / delivery & monitoring
             <span className="cursor">_</span>
+          </div>
+        </>
+      )}
+      {kind === 'terraform' && (
+        <>
+          <div className="preview-top">
+            <span>AZURE / infrastructure map</span>
+            <span className="tiny-status">architecture concept</span>
+          </div>
+          <div className="terraform-map">
+            <div className="tf-resource-group">
+              <span>RESOURCE GROUP</span>
+              <div className="tf-vnet">
+                <small>VIRTUAL NETWORK / SUBNET</small>
+                <div className="tf-compute">
+                  <Cloud size={26} />
+                  <span>
+                    Linux VM<small>NIC + PUBLIC IP</small>
+                  </span>
+                </div>
+                <span className="tf-boundary">
+                  <ShieldCheck size={12} /> NETWORK SECURITY GROUP
+                </span>
+              </div>
+            </div>
+            <div className="tf-state">
+              <Database size={20} />
+              <span>
+                REMOTE STATE<small>Azure Blob Storage</small>
+              </span>
+            </div>
+          </div>
+        </>
+      )}
+      {kind === 'ansible' && (
+        <>
+          <div className="preview-top">
+            <span>ANSIBLE / configure_all.yml</span>
+            <span className="tiny-status">playbook concept</span>
+          </div>
+          <div className="ansible-terminal">
+            <div className="terminal-dots">
+              <i />
+              <i />
+              <i />
+              <span>azure_linux_hosts</span>
+            </div>
+            <p>
+              <b>PLAY</b> configure & harden
+            </p>
+            {[
+              'common / packages & users',
+              'security / UFW & fail2ban',
+              'docker / container runtime',
+              'nginx / reverse proxy',
+            ].map((role) => (
+              <div className="ansible-role" key={role}>
+                <Check size={12} />
+                <span>{role}</span>
+              </div>
+            ))}
+            <div className="ansible-recap">INVENTORY → ROLES → HANDLERS</div>
+          </div>
+        </>
+      )}
+      {kind === 'containers' && (
+        <>
+          <div className="preview-top">
+            <span>DOCKER COMPOSE / services</span>
+            <span className="tiny-status">service concept</span>
+          </div>
+          <div className="compose-network">
+            <div className="compose-service">
+              <LayoutDashboard size={25} />
+              <b>Nginx</b>
+              <small>STATIC FRONTEND</small>
+            </div>
+            <span className="compose-link">HTTP →</span>
+            <div className="compose-service">
+              <Code2 size={25} />
+              <b>Flask</b>
+              <small>REST API</small>
+            </div>
+          </div>
+          <div className="jenkins-lane">
+            <GitBranch size={16} />
+            <span>
+              JENKINS PIPELINE<small>Webhook / Build / Health test / Deploy</small>
+            </span>
+            <Box size={22} />
           </div>
         </>
       )}
@@ -149,16 +216,12 @@ export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
           </div>
         </div>
       )}
-      {(kind === 'space' || kind === 'platform' || kind === 'research') && (
+      {(kind === 'space' || kind === 'platform') && (
         <>
           <div className="stars" />
           <span className="game-caption">
-            {kind === 'space'
-              ? 'METEOR BLAST'
-              : kind === 'research'
-                ? 'FINAL-YEAR PROJECT'
-                : 'THE NEXT ADVENTURE'}
-            <small>{kind === 'research' ? 'GAME DEVELOPMENT' : 'UNITY / C#'}</small>
+            {kind === 'space' ? 'METEOR BLAST' : 'THE NEXT ADVENTURE'}
+            <small>UNITY / C#</small>
           </span>
           {kind === 'space' ? (
             <>
@@ -179,6 +242,32 @@ export default function ProjectVisual({ kind }: { kind: Project['visual'] }) {
             </>
           )}
           <span className="concept-label">CONCEPT ART · NOT GAMEPLAY</span>
+        </>
+      )}
+      {kind === 'research' && (
+        <>
+          <span className="game-caption">
+            FINAL-YEAR BUILD<small>UNITY 2D / MOVEMENT STUDY</small>
+          </span>
+          <div className="research-level" aria-hidden="true">
+            <div className="research-sun" />
+            <div className="research-pillars">
+              <i />
+              <i />
+              <i />
+              <i />
+            </div>
+            <div className="research-ledge ledge-one" />
+            <div className="research-ledge ledge-two" />
+            <div className="research-ledge ledge-three" />
+            <div className="research-jump-path" />
+            <div className="research-player" />
+          </div>
+          <div className="research-controls">
+            <span>← → MOVE</span>
+            <span>SPACE / JUMP</span>
+          </div>
+          <span className="concept-label">LEVEL CONCEPT · NOT GAMEPLAY</span>
         </>
       )}
     </div>

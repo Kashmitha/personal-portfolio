@@ -191,13 +191,14 @@ export const projects: Project[] = [
     category: 'games',
     subtitle: 'Final-year project · Game development',
     description:
-      'The game I created for my final-year project, bringing my academic work and interest in interactive experiences together.',
-    tags: ['Final-year project', 'Game development'],
+      'My final-year Unity 2D game project, with physics-based player movement, grounded jumping and animation controls implemented in C#.',
+    tags: ['Unity 2022', 'C#', '2D physics', 'Final-year project'],
     repo: 'MyFinalYearProject',
     visual: 'research',
     details: [
-      'A game created as my final-year project.',
-      'The linked repository is the dedicated source location supplied for this project.',
+      'Created as my final-year game project; the public source uses Unity 2022.3.43f1 and includes a Level1 scene.',
+      'PlayerMovement.cs implements horizontal movement, facing direction, grounded jumping and run/jump animation parameters with Rigidbody2D and Animator.',
+      'The project includes 2D art assets, Unity scene files and a Joystick Pack input package.',
       'The preview is a portfolio concept illustration, not a gameplay screenshot.',
     ],
   },
